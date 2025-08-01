@@ -1,0 +1,63 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/docker-existing-dockerfile
+{
+	"name": "C++ System Monitor",
+	"build": {
+		// Sets the run context to one level up instead of the .devcontainer folder.
+		"context": "..",
+		// Update the 'dockerFile' property if you aren't using the standard 'Dockerfile' filename.
+		"dockerfile": "../Dockerfile"
+	},
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Uncomment the next line to run commands after the container is created.
+	"postCreateCommand": "mkdir -p build && cd build && cmake .. && make",
+
+	// Configure tool-specific properties.
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-vscode.cmake-tools",
+				"ms-vscode.cpptools",
+				"ms-vscode.cpptools-extension-pack",
+				"ms-vscode.cpptools-themes",
+				"xaver.clang-format",
+				"twxs.cmake",
+				"ms-vscode.makefile-tools"
+			],
+			"settings": {
+				"cmake.buildDirectory": "${workspaceFolder}/build",
+				"cmake.sourceDirectory": "${workspaceFolder}",
+				"C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+				"files.associations": {
+					"*.h": "cpp",
+					"*.cpp": "cpp"
+				},
+				"editor.formatOnSave": true,
+				"C_Cpp.clang_format_style": "file",
+				"cmake.configureOnOpen": true
+			}
+		}
+	},
+
+	// Mount /proc for system monitoring capabilities
+	"mounts": [
+		"source=/proc,target=/proc,type=bind,readonly"
+	],
+
+	// Required for system monitoring
+	"privileged": true,
+
+	// Environment variables
+	"containerEnv": {
+		"TERM": "xterm-256color"
+	},
+
+	// Connect as root user for system access
+	"remoteUser": "root"
+}
