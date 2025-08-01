@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  system-monitor:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cpp-system-monitor
+    # For interactive terminal applications like ncurses
+    stdin_open: true
+    tty: true
+    # Mount the host's /proc directory to access system information
+    volumes:
+      - /proc:/proc:ro
+    # Required for accessing system information
+    privileged: true
+    # Alternative to privileged mode (more secure but might need adjustments)
+    # cap_add:
+    #   - SYS_PTRACE
+    #   - SYS_ADMIN
+    # Environment variables
+    environment:
+      - TERM=xterm-256color
+    # Restart policy
+    restart: unless-stopped
