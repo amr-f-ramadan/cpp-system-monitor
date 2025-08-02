@@ -2,6 +2,9 @@
 
 A real-time Linux system monitor implemented in C++17 as part of the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213). This project demonstrates object-oriented programming principles, modern C++ practices, and containerized development workflows.
 
+**This Project was first submitted on August 27, 2021. Later on, it went through some enhancements that are listed below.**
+
+
 ![System Monitor](images/monitor.png)
 
 ## 🚀 My Contributions
